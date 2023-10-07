@@ -1,3 +1,5 @@
+import fs from 'fs'
+
 function deepMerge(target: any, source: any): object {
   const output = { ...target }
 
@@ -14,4 +16,19 @@ function deepMerge(target: any, source: any): object {
 
 export function mergeConfig(defaults: object, userConfig: object): object {
   return deepMerge({ ...defaults }, userConfig)
+}
+
+export function loadUserConfig(configPath: string): object {
+  if (!fs.existsSync(configPath)) {
+    return {}
+  }
+
+  const fileContents = fs.readFileSync(configPath, 'utf8')
+
+  try {
+    return JSON.parse(fileContents)
+  } catch (error) {
+    console.error(error)
+    return {}
+  }
 }
