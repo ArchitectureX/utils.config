@@ -1,54 +1,39 @@
-# @architecturex/utils.slug
+# @architecturex/utils.config
 
-## slug(str: string): string
+## deepMerge(target: any, source: any): object
 
-The slug function is a simple utility designed to convert strings into URL-friendly slugs. This is especially useful when creating web pages with human-readable URLs, based on titles or names that can contain special characters, spaces, or uppercase letters.
+This utility provides functions to deeply merge objects, specifically designed for configurations. It's useful when you have a default configuration and want to override it with user-specific settings without mutating the original objects.
 
 ## Installation
 
-`npm install @architecturex/utils.slug`
+`npm install @architecturex/utils.config`
 
 ## Usage
 
-To use the slug function, import it into your project:
-
 ```javascript
-import slug from '@architecturex/utils.slug'
+import { mergeConfig } from '@architecturex/utils.slug'
 ```
 
-Then, call the function with a string argument:
+Use mergeConfig to merge default and user-specific configurations:
 
 ```javascript
-const mySlug = slug('Your String Here')
+const defaults = {
+  a: 1,
+  nested: {
+    value: 2
+  }
+}
+
+const userConfig = {
+  nested: {
+    value: 3
+  },
+  b: 4
+}
+
+const merged = mergeConfig(defaults, userConfig)
+console.log(merged) // Outputs: { a: 1, nested: { value: 3 }, b: 4 }
 ```
-
-## Examples
-
-### Basic String:
-
-```javascript
-slug('Hello World') // "hello-world"
-```
-
-### String with special characters:
-
-```javascript
-slug('Hello, World!') // "hello-world"
-```
-
-### String with non-ASCII characters:
-
-```javascript
-slug('Café con Leche') // "cafe-con-leche"
-```
-
-## Function Behavior
-
-- The function converts the string to lowercase.
-- It removes diacritics (accents) from characters.
-- Non-alphanumeric characters (excluding hyphens) are replaced with spaces.
-- Continuous spaces or hyphens are replaced with a single hyphen.
-- The resulting string is trimmed of any leading or trailing spaces or hyphens.
 
 ## Contribution
 
