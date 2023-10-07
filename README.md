@@ -1,6 +1,6 @@
 # @architecturex/utils.config
 
-## deepMerge(target: any, source: any): object
+## mergeConfig(defaults: object, userConfig: object): object
 
 This utility provides functions to deeply merge objects, specifically designed for configurations. It's useful when you have a default configuration and want to override it with user-specific settings without mutating the original objects.
 
