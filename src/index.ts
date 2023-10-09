@@ -19,11 +19,11 @@ export function mergeConfig(defaults: object, userConfig: object): object {
 }
 
 export function loadUserConfig(configPath: string): object {
-  if (!fs.existsSync(configPath)) {
+  if (fs && !fs?.existsSync(configPath)) {
     return {}
   }
 
-  const fileContents = fs.readFileSync(configPath, 'utf8')
+  const fileContents = fs ? fs.readFileSync(configPath, 'utf8') : '{}'
 
   try {
     return JSON.parse(fileContents)
